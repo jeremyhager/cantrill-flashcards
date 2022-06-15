@@ -35,10 +35,24 @@ func main() {
 			}
 
 			_ = json.Unmarshal(currentFile, &sections)
-			for q, a := range sections.NoteSection[0].Notes {
-				fmt.Printf("question: %v\n", q)
-				fmt.Printf("answer: %v\n", a)
+
+			for k := range sections.NoteSection[0].Notes {
+
 			}
+
+			fmt.Printf("%+v", sections.NoteSection[0].Notes)
 		}
 	}
+}
+
+func keysList(m map[string]string) []string {
+	keys := make([]string, len(m))
+	i := 0
+
+	for k := range m {
+		keys[i] = k
+		i++
+	}
+
+	return keys
 }
