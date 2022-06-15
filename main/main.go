@@ -26,7 +26,6 @@ func main() {
 	}
 
 	for _, file := range files {
-		fmt.Println(file.Name())
 		if file.Name() == "main.go" {
 			continue
 		} else {
@@ -36,8 +35,10 @@ func main() {
 			}
 
 			_ = json.Unmarshal(currentFile, &sections)
-			fmt.Printf("%s", sections)
+			for q, a := range sections.NoteSection[0].Notes {
+				fmt.Printf("question: %v\n", q)
+				fmt.Printf("answer: %v\n", a)
+			}
 		}
-
 	}
 }
