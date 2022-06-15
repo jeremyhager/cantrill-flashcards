@@ -1,9 +1,14 @@
 package main
 
-import "io/ioutil"
+import (
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"log"
+)
 
 type SectionsList struct {
-	NoteSection []NoteSection
+	NoteSection []NoteSection `json:"Section"`
 }
 
 type NoteSection struct {
@@ -12,12 +17,27 @@ type NoteSection struct {
 }
 
 func main() {
-	files, err := ioutil.ReadDir(directory)
+
+	sections := &SectionsList{}
+
+	files, err := ioutil.ReadDir(".")
 	if err != nil {
-		return nil, err
+		log.Fatal(err)
 	}
 
 	for _, file := range files {
+		fmt.Println(file.Name())
+		if file.Name() == "main.go" {
+			continue
+		} else {
+			currentFile, err := ioutil.ReadFile(file.Name())
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			_ = json.Unmarshal(currentFile, &sections)
+			fmt.Printf("%s", sections)
+		}
 
 	}
 }

@@ -1,7 +1,7 @@
 package notes
 
 type SectionsList struct {
-	NoteSection []NoteSection
+	NoteSection []NoteSection `json:"Section"`
 }
 
 type NoteSection struct {
